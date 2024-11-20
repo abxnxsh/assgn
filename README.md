@@ -29,6 +29,24 @@ The project is divided into multiple **modules** to ensure maintainability and s
 git clone https://github.com/abxnxsh/assgn.git
 cd assgn
 ```
+## **Project Structure**
+
+After setting up the project, here’s a breakdown of the directory structure:
+
+- **`cmd/api/`**: The entry point for the API. The `main.go` file starts the server, sets up routes, and connects to services like the database, cache, and message queue.
+
+- **`image_processor/`**: Contains code for image-related tasks. This is used for background tasks that run asynchronously.
+
+- **`internal/`**: Contains the core business logic of the application:
+  - **`database/`**: Handles database operations like saving and retrieving product data.
+  - **`handlers/`**: Manages API requests (e.g., getting and creating products).
+  - **`redisclient/`**: Interacts with Redis to cache frequently accessed data, improving performance.
+  - **`rabbitmq/`**: Handles background tasks (e.g., image processing) RabbitMQ.
+
+- **`models/`**: Defines data models, like the `product.go` model, representing the structure of data used in the application.
+
+- **`test/`**: Contains test files for the project
+
 ## **Tasks and Implementation**
 
 ### 1. **API Design**
@@ -68,9 +86,9 @@ To reduce database load, Redis was integrated for caching:
 
 ### 4. **Handling Asynchronous Tasks**
 
-For tasks like image processing, I used Redis Queue to handle background jobs:
+For tasks like image processing, I used Rabbitmq to handle background jobs:
 
-- When an image needs processing, it's added to a Redis queue.
+- When an image needs processing, it's added to a queue.
 - A worker retrieves the task from the queue and processes it asynchronously, freeing the main API to handle other requests.
 
   ![image](https://github.com/user-attachments/assets/129278e5-d6e6-4b71-9ac2-5d3f27254788)
@@ -88,7 +106,7 @@ To track activities and errors, I implemented logging:
 The application is designed with scalability in mind by:
 
 - Caching data in Redis to handle a high volume of read requests.
-- Offloading long-running tasks to Redis Queue, allowing the API to respond quickly to user requests.
+- Offloading long-running tasks to Rabbitmq, allowing the API to respond quickly to user requests.
 
 ### 7. **Testing**
 
