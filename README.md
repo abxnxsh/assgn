@@ -38,6 +38,7 @@ The design of the API focuses on providing clear and functional endpoints for in
 - **Product Endpoints**:
   - **GET /products/{id}**: Retrieves a product by its ID from the database. If not found in the cache, it fetches from the database and stores the result in Redis.
   - **POST /products**: Inserts a new product into the database. It accepts a JSON body containing product details like `name`, `description`, `images`, and `price`.
+ 
 ![image](https://github.com/user-attachments/assets/60ee57a4-5aa1-471a-9c5b-de0f814453d6)
 
 
@@ -49,6 +50,9 @@ I connected the Go application to a PostgreSQL database by:
 - Writing functions to insert and retrieve product data, ensuring smooth interaction with the database.
 - Implementing transactional consistency, so if one operation fails, it rolls back the entire transaction, keeping the data consistent.
 
+  ![image](https://github.com/user-attachments/assets/9f95de3e-640f-4aad-8f36-ee5b5f783a71)
+
+
 ### 3. **Caching with Redis**
 
 To reduce database load, Redis was integrated for caching:
@@ -57,12 +61,18 @@ To reduce database load, Redis was integrated for caching:
 - If not, it fetches from the database and stores the data in Redis for future requests.
 - Redis helps in improving response time by storing frequently accessed data in-memory.
 
+  ![image](https://github.com/user-attachments/assets/d4f54953-b674-45b4-b46b-b83b131eb7bc)
+
+
 ### 4. **Handling Asynchronous Tasks**
 
 For tasks like image processing, I used Redis Queue to handle background jobs:
 
 - When an image needs processing, it's added to a Redis queue.
 - A worker retrieves the task from the queue and processes it asynchronously, freeing the main API to handle other requests.
+
+  ![image](https://github.com/user-attachments/assets/129278e5-d6e6-4b71-9ac2-5d3f27254788)
+
   
 ### 5. **Logging and Error Handling**
 
