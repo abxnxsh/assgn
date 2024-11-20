@@ -80,7 +80,7 @@ For tasks like image processing, I used Redis Queue to handle background jobs:
 
 To track activities and errors, I implemented logging:
 
-- **Logrus** or **Zap** was used for centralized logging.
+- **Logrus** was used for centralized logging.
 - Logs provide important details like when a product is fetched, inserted, or if an error occurs, making it easier to debug issues.
 
 ### 6. **Scalability**
