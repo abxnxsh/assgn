@@ -1,26 +1,30 @@
 # Assignment
 
-### Overview
+## **Overview**
 
-This project is a **scalable, modular** web application designed to handle high API loads, manage transactional consistency, and integrate **asynchronous background tasks** with **caching** and **logging** mechanisms. The goal of the project is to build a robust system for managing product data, processing images, and ensuring data consistency across various services.
+This project is a **modular web application** built in **Go**, designed to handle API requests, manage product data, and ensure **transactional consistency** across various services. The project leverages **Redis** for caching, **PostgreSQL** for data storage, and **background task processing** for async jobs (e.g., image processing).
 
-Key features:
-- **Modular architecture**: The application is broken down into separate modules for API handling, database management, asynchronous tasks, caching, and logging.
-- **Scalable**: Designed to handle increased load through **distributed caching** (Redis) and **background task processing** (using message queues).
-- **Transactional Consistency**: Ensures data consistency with retries, compensating transactions, and a robust caching strategy.
+## **Technologies Used**
 
+- **Go**: Backend API development
+- **PostgreSQL**: Relational database for data persistence
+- **Redis**: In-memory data store for caching
+- **RabbitMQ/Redis Queue**: For handling asynchronous tasks
+- **Logrus/Zap**: For logging
 
-The system is divided into several key modules, each with a clear responsibility:
+## **Architecture**
 
-- **API Module**: Handles all HTTP requests and routes, with each API route interacting with controllers that manage the business logic.
-- **Database Module**: Manages database interactions, including connections, queries, and migrations. A relational database (e.g., PostgreSQL) is used for persistence.
-- **Cache Module**: Caching layer built with **Redis** to speed up frequently accessed data.
-- **Asynchronous Task Module**: For handling background tasks like image processing, which are offloaded to a message queue (e.g., RabbitMQ or Redis Queue).
-- **Logging Module**: Centralized logging system using tools like **Logrus** or **Zap** to maintain structured logs of all activities and errors.
+The project is divided into multiple **modules** to ensure maintainability and scalability:
 
-#### **Core Technologies**
-- **Go**: Programming language used for the backend services.
-- **PostgreSQL**: Relational database used for storing product data.
-- **Redis**: Distributed cache for speeding up queries and storing session data.
-- **RabbitMQ** or **Redis Queue**: For handling background tasks and queues.
-- **Docker**: Containerization of services (API, Redis, PostgreSQL, etc.).
+1. **API Module**: Handles incoming HTTP requests, routes, and communicates with other services like the database and cache.
+2. **Database Module**: Manages database interactions (CRUD operations, transactions).
+3. **Cache Module**: Uses Redis for storing frequently accessed data and reducing database load.
+4. **Asynchronous Tasks**: Background jobs are managed via a message queue (RabbitMQ/Redis Queue) to offload heavy tasks such as image processing.
+5. **Logging**: Centralized logging is implemented to capture detailed logs for easier debugging and monitoring.
+
+## **Setup Instructions**
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/abxnxsh/assgn.git
+cd assgn
