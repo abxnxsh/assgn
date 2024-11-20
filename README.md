@@ -39,7 +39,9 @@ The design of the API focuses on providing clear and functional endpoints for in
   - **GET /products/{id}**: Retrieves a product by its ID from the database. If not found in the cache, it fetches from the database and stores the result in Redis.
   - **POST /products**: Inserts a new product into the database. It accepts a JSON body containing product details like `name`, `description`, `images`, and `price`.
  
-![image](https://github.com/user-attachments/assets/60ee57a4-5aa1-471a-9c5b-de0f814453d6)
+    
+ ![image](https://github.com/user-attachments/assets/0fc87687-e24d-40b9-bad7-38148ab310db)
+
 
 
 ### 2. **Database Integration**
